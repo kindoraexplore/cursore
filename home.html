@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/png" href="kindora-logo.ico" />
+    <title>Kindora — Explore the World</title>
+
+    <!-- Preloads (safe if assets exist; otherwise, ignored) -->
+    <link rel="preload" href="bgvideo.mp4" as="video" type="video/mp4" />
+
+    <link href="homepage.css" rel="stylesheet" />
+    <script src="homepage.js" defer></script>
+  </head>
+  <body class="no-js">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Hero / Background Video -->
+    <div class="hero">
+      <video id="bg-video" class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/hero-poster.jpg" aria-hidden="true">
+        <source src="bgvideo.mp4" type="video/mp4" />
+      </video>
+      <div class="video-overlay">
+        <h1>Explore the World</h1>
+        <p>Your journey starts here</p>
+        <button class="cta-btn" data-scroll="#popular">Start Exploring</button>
+      </div>
+      <div class="hero-gradient"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="site-header" role="banner">
+      <div id="nav1" class="nav">
+        <a href="home.html" id="logo-link" class="logo" aria-label="Kindora Home">
+          <div id="logo">Kindora</div>
+        </a>
+
+        <nav id="nav2" class="nav-links" aria-label="Primary">
+          <div class="inspire-wrapper">
+            <button class="a1 dropbtn" id="inspireBtn" aria-expanded="false" aria-controls="inspireScroll">
+              Be Inspired
+            </button>
+            <div class="scroll-container1" id="inspireScroll" hidden>
+              <a data-href="asia.html" tabindex="-1">
+                <div class="image-wrapper1">
+                  <img src="web images/banner/asia.jpg" alt="Asia" loading="lazy" decoding="async" />
+                  <div class="overlay-text">Asia</div>
+                </div>
+              </a>
+              <a data-href="europe.html" tabindex="-1">
+                <div class="image-wrapper1">
+                  <img src="web images/banner/europe.jpeg" alt="Europe" loading="lazy" decoding="async" />
+                  <div class="overlay-text">Europe</div>
+                </div>
+              </a>
+              <a data-href="africa.html" tabindex="-1">
+                <div class="image-wrapper1">
+                  <img src="web images/banner/africa.jpg" alt="Africa" loading="lazy" decoding="async" />
+                  <div class="overlay-text">Africa</div>
+                </div>
+              </a>
+              <a data-href="north_america.html" tabindex="-1">
+                <div class="image-wrapper1">
+                  <img src="web images/banner/north america.jpg" alt="North America" loading="lazy" decoding="async" />
+                  <div class="overlay-text">North America</div>
+                </div>
+              </a>
+              <a data-href="south_america.html" tabindex="-1">
+                <div class="image-wrapper1">
+                  <img src="7wonders/7_wonders/Machu Picchu.jpeg" alt="South America" loading="lazy" decoding="async" />
+                  <div class="overlay-text">South America</div>
+                </div>
+              </a>
+              <a data-href="australia.html" tabindex="-1">
+                <div class="image-wrapper1">
+                  <img src="web images/banner/australia.jpg" alt="Australia" loading="lazy" decoding="async" />
+                  <div class="overlay-text">Australia</div>
+                </div>
+              </a>
+              <a data-href="antarctica.html" tabindex="-1">
+                <div class="image-wrapper1">
+                  <img src="web images/banner/antarctica.jpeg" alt="Antarctica" loading="lazy" decoding="async" />
+                  <div class="overlay-text">Antarctica</div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <a class="a1 dropbtn" href="explore.html">Places to go</a>
+          <a class="a1 dropbtn" href="things_to_do.html">Things to do</a>
+          <a class="a1 dropbtn" href="booking.php">Plan Your Trip</a>
+        </nav>
+
+        <button class="menu" id="menuToggle" aria-expanded="false" aria-controls="sidebar" aria-label="Open menu">☰</button>
+
+        <aside id="sidebar" class="sidebar" aria-hidden="true">
+          <button class="closebtn" id="menuClose" aria-label="Close menu">×</button>
+          <a href="home.html">Home</a>
+          <a href="login.php">Login/Register</a>
+          <a href="booking.php">Book Your Trips</a>
+          <a href="mytrips.html">My Trips</a>
+          <a href="aboutus.html">About</a>
+          <a href="contactus.html">Contact</a>
+        </aside>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Popular Places -->
+      <section id="popular" class="section">
+        <div class="section-header with-actions">
+          <h2 class="titletext">Top 10 Most Popular Places</h2>
+          <div class="section-actions">
+            <label class="search-label">
+              <span class="visually-hidden">Search places</span>
+              <input id="placeSearch" class="search-input" type="search" placeholder="Search places…" />
+            </label>
+          </div>
+        </div>
+        <div class="scroll-container" data-drag-scroll>
+          <a href="places/Eiffel_Tower.html" class="card-link" data-title="Eiffel Tower">
+            <div class="image-wrapper">
+              <img src="places/Eiffel Tower.jpg" alt="Eiffel Tower" loading="lazy" decoding="async" />
+              <div class="overlay-text">Eiffel Tower</div>
+            </div>
+          </a>
+          <a href="places/Statue_of_Liberty.html" class="card-link" data-title="Statue of Liberty">
+            <div class="image-wrapper">
+              <img src="places/Statue of Liberty.jpeg" alt="Statue of Liberty" loading="lazy" decoding="async" />
+              <div class="overlay-text">Statue of Liberty</div>
+            </div>
+          </a>
+          <a href="places/Sydney_Opera_House.html" class="card-link" data-title="Sydney Opera House">
+            <div class="image-wrapper">
+              <img src="places/Sydney_Opera_House.jpeg" alt="Sydney Opera House" loading="lazy" decoding="async" />
+              <div class="overlay-text">Sydney Opera House</div>
+            </div>
+          </a>
+          <a href="places/Burj_Khalifa.html" class="card-link" data-title="Burj Khalifa">
+            <div class="image-wrapper">
+              <img src="places/Burj_Khalifa.jpg" alt="Burj Khalifa" loading="lazy" decoding="async" />
+              <div class="overlay-text">Burj Khalifa</div>
+            </div>
+          </a>
+          <a href="places/Mount_Fuji.html" class="card-link" data-title="Mount Fuji">
+            <div class="image-wrapper">
+              <img src="places/Mount Fuji.jpg" alt="Mount Fuji" loading="lazy" decoding="async" />
+              <div class="overlay-text">Mount Fuji</div>
+            </div>
+          </a>
+          <a href="places/Grand_Canyon.html" class="card-link" data-title="Grand Canyon">
+            <div class="image-wrapper">
+              <img src="places/Grand Canyon.jpeg" alt="Grand Canyon" loading="lazy" decoding="async" />
+              <div class="overlay-text">Grand Canyon</div>
+            </div>
+          </a>
+          <a href="places/Great_Pyramid_of_Giza.html" class="card-link" data-title="Great Pyramid of Giza">
+            <div class="image-wrapper">
+              <img src="places/Great Pyramid of Giza.jpg" alt="Great Pyramid of Giza" loading="lazy" decoding="async" />
+              <div class="overlay-text">Great Pyramid of Giza</div>
+            </div>
+          </a>
+          <a href="places/Stonehenge.html" class="card-link" data-title="Stonehenge">
+            <div class="image-wrapper">
+              <img src="places/Stonehenge.jpg" alt="Stonehenge" loading="lazy" decoding="async" />
+              <div class="overlay-text">Stonehenge</div>
+            </div>
+          </a>
+          <a href="places/Santorini.html" class="card-link" data-title="Santorini">
+            <div class="image-wrapper">
+              <img src="places/Santorini.png" alt="Santorini" loading="lazy" decoding="async" />
+              <div class="overlay-text">Santorini</div>
+            </div>
+          </a>
+          <a href="places/Times_Square.html" class="card-link" data-title="Times Square">
+            <div class="image-wrapper">
+              <img src="places/Times Square.jpg" alt="Times Square" loading="lazy" decoding="async" />
+              <div class="overlay-text">Times Square</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Packages -->
+      <section class="section fade-in">
+        <h2 class="titletext">Our Packages</h2>
+        <div class="packages">
+          <div class="package-card">
+            <img src="our_packages/summer.avif" alt="Summer" loading="lazy" decoding="async" />
+            <h3>Summer Escape</h3>
+            <p>Enjoy sunny beaches, tropical islands, and exotic adventures.</p>
+            <a href="summer.html" class="package-btn">Book Now</a>
+          </div>
+
+          <div class="package-card">
+            <img src="our_packages/winter.avif" alt="Winter" loading="lazy" decoding="async" />
+            <h3>Winter Wonderland</h3>
+            <p>Experience snowy mountains, skiing, and cozy winter retreats.</p>
+            <a href="winter.html" class="package-btn">Book Now</a>
+          </div>
+
+          <div class="package-card">
+            <img src="our_packages/monsoon.avif" alt="Monsoon" loading="lazy" decoding="async" />
+            <h3>Monsoon Magic</h3>
+            <p>Explore lush greenery, waterfalls, and refreshing rains.</p>
+            <a href="monsoon.html" class="package-btn">Book Now</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slideshow -->
+      <section class="section">
+        <div class="slideshow-container" data-slideshow data-interval="3000">
+          <button class="slide-control prev" data-prev aria-label="Previous slide">‹</button>
+          <button class="slide-control next" data-next aria-label="Next slide">›</button>
+          <button class="slide-control pause" data-pause aria-pressed="false" aria-label="Pause autoplay">❚❚</button>
+
+          <a href="packages/europe_escape.html" class="mySlides fade" aria-hidden="false">
+            <div class="numbertext">1 / 6</div>
+            <img src="images/europe_romantic.avif" alt="Romantic Europe Escape" class="im" loading="lazy" decoding="async" />
+            <div class="text">
+              <strong>Romantic Europe Escape – 30% Off</strong><br />
+              Explore Paris, Venice & Santorini for couples
+            </div>
+          </a>
+
+          <a href="packages/asia_adventure.html" class="mySlides fade" aria-hidden="true">
+            <div class="numbertext">2 / 6</div>
+            <img src="images/asia_adventure.webp" alt="Asian Adventure Trail" class="im" loading="lazy" decoding="async" />
+            <div class="text">
+              <strong>Asian Adventure Trail – 25% Off</strong><br />
+              Thailand, Japan & Bali – culture, food & adventure
+            </div>
+          </a>
+
+          <a href="packages/africa_safari.html" class="mySlides fade" aria-hidden="true">
+            <div class="numbertext">3 / 6</div>
+            <img src="images/africa_safari.webp" alt="African Safari" class="im" loading="lazy" decoding="async" />
+            <div class="text">
+              <strong>African Safari – 20% Off</strong><br />
+              Safari in Kenya & South Africa – wildlife & nature
+            </div>
+          </a>
+
+          <a href="packages/usa_roadtrip.html" class="mySlides fade" aria-hidden="true">
+            <div class="numbertext">4 / 6</div>
+            <img src="images/usa_roadtrip.webp" alt="USA Road Trip" class="im" loading="lazy" decoding="async" />
+            <div class="text">
+              <strong>USA Road Trip – 35% Off</strong><br />
+              East to West coast – New York, Grand Canyon, LA
+            </div>
+          </a>
+
+          <a href="packages/maldives_retreat.html" class="mySlides fade" aria-hidden="true">
+            <div class="numbertext">5 / 6</div>
+            <img src="images/maldives_luxury.webp" alt="Luxury Maldives Retreat" loading="lazy" decoding="async" />
+            <div class="text">
+              <strong>Luxury Maldives Retreat – 40% Off</strong><br />
+              Private beaches, water villas & spa experience
+            </div>
+          </a>
+
+          <a href="packages/egypt_journey.html" class="mySlides fade" aria-hidden="true">
+            <div class="numbertext">6 / 6</div>
+            <img src="images/egypt_mystical.avif" alt="Mystical Egypt Journey" loading="lazy" decoding="async" />
+            <div class="text">
+              <strong>Mystical Egypt Journey – 30% Off</strong><br />
+              Pyramids, Nile Cruise & Ancient temples
+            </div>
+          </a>
+        </div>
+        <div class="dots" role="tablist" aria-label="Slideshow pagination">
+          <button class="dot" aria-label="Go to slide 1" role="tab" aria-selected="true"></button>
+          <button class="dot" aria-label="Go to slide 2" role="tab" aria-selected="false"></button>
+          <button class="dot" aria-label="Go to slide 3" role="tab" aria-selected="false"></button>
+          <button class="dot" aria-label="Go to slide 4" role="tab" aria-selected="false"></button>
+          <button class="dot" aria-label="Go to slide 5" role="tab" aria-selected="false"></button>
+          <button class="dot" aria-label="Go to slide 6" role="tab" aria-selected="false"></button>
+        </div>
+      </section>
+
+      <!-- 7 Wonders -->
+      <section id="wonders" class="section">
+        <h2 class="titletext">7 Wonders of the World</h2>
+        <div class="scroll-container" data-drag-scroll>
+          <a href="7wonders/Taj_Mahal.html" class="card-link">
+            <div class="image-wrapper">
+              <img src="7wonders/7_wonders/Taj-Mahal.jpg" alt="Taj Mahal" loading="lazy" decoding="async" />
+              <div class="overlay-text">Taj Mahal</div>
+            </div>
+          </a>
+          <a href="7wonders/Great Wall of China.html" class="card-link">
+            <div class="image-wrapper">
+              <img src="7wonders/7_wonders/Great Wall of China.jpg" alt="Great Wall of China" loading="lazy" decoding="async" />
+              <div class="overlay-text">Great Wall of China</div>
+            </div>
+          </a>
+          <a href="7wonders/christ the redeemer.html" class="card-link">
+            <div class="image-wrapper">
+              <img src="7wonders/7_wonders/Christ the Redeemer.jpeg" alt="Christ the Redeemer" loading="lazy" decoding="async" />
+              <div class="overlay-text">Christ the Redeemer</div>
+            </div>
+          </a>
+          <a href="7wonders/Machu Picchu.html" class="card-link">
+            <div class="image-wrapper">
+              <img src="7wonders/7_wonders/Machu Picchu.jpeg" alt="Machu Picchu" loading="lazy" decoding="async" />
+              <div class="overlay-text">Machu Picchu</div>
+            </div>
+          </a>
+          <a href="7wonders/Chichen Itza.html" class="card-link">
+            <div class="image-wrapper">
+              <img src="7wonders/7_wonders/Chichen Itza (Mexico).jpg" alt="Chichen Itza" loading="lazy" decoding="async" />
+              <div class="overlay-text">Chichen Itza</div>
+            </div>
+          </a>
+          <a href="7wonders/Petra.html" class="card-link">
+            <div class="image-wrapper">
+              <img src="7wonders/7_wonders/Petra (Jordan).jpeg" alt="Petra" loading="lazy" decoding="async" />
+              <div class="overlay-text">Petra</div>
+            </div>
+          </a>
+          <a href="7wonders/Colosseum.html" class="card-link">
+            <div class="image-wrapper">
+              <img src="7wonders/7_wonders/Roman Colosseum (Italy).jpeg" alt="Roman Colosseum" loading="lazy" decoding="async" />
+              <div class="overlay-text">Roman Colosseum</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Volunteers & Events -->
+      <section id="volunteers-events" class="section volunteers-events-section">
+        <h2>Kindora Volunteers & Events (2025)</h2>
+        <div class="cards-container">
+          <div class="card">
+            <h3>First Year Volunteers</h3>
+            <p>
+              Our journey begins with passionate travelers and volunteers joining hands to explore and promote sustainable tourism.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Local Partners</h3>
+            <p>
+              Kindora has started collaborations with local guides and cultural storytellers to bring authentic experiences.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Sustainability Ambassadors</h3>
+            <p>
+              Early volunteers working on eco-travel, heritage protection, and community-led projects.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Launch Event</h3>
+            <p>
+              Kindora officially launched in 2025 with a vision to inspire world exploration.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Virtual Culture Exchange</h3>
+            <p>
+              Hosted our first online cultural session connecting travelers from different continents.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Eco & Community Activities</h3>
+            <p>
+              Beginning small eco-drives and heritage awareness campaigns with local groups.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Countries Featured</h3>
+            <p>
+              Within the first year, Kindora highlights major attractions from Asia, Europe, and Africa.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Community Growth</h3>
+            <p>
+              Thousands of explorers inspired to travel responsibly since our launch.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Future Vision</h3>
+            <p>
+              Expanding our global reach by adding more destinations, volunteer programs, and cultural events in upcoming years.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Counters -->
+      <section class="section counters-section" id="achievements">
+        <div class="container">
+          <h2>Our Achievements</h2>
+          <div class="counters-grid">
+            <div class="counter-box">
+              <h3 class="counter" data-target="5000">0</h3>
+              <p>Happy Travelers</p>
+            </div>
+            <div class="counter-box">
+              <h3 class="counter" data-target="1200">0</h3>
+              <p>Tours Organized</p>
+            </div>
+            <div class="counter-box">
+              <h3 class="counter" data-target="800">0</h3>
+              <p>Reviews</p>
+            </div>
+            <div class="counter-box">
+              <h3 class="counter" data-target="150">0</h3>
+              <p>Destinations</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section class="section reviews-section" id="reviews">
+        <div class="container">
+          <h2>Traveler Reviews</h2>
+
+          <div id="reviews-list" class="reviews-grid">
+            <div class="review-card">
+              <h4>Aditi Sharma</h4>
+              <p class="stars" aria-label="5 out of 5">★★★★★</p>
+              <p>
+                An unforgettable experience! The Taj Mahal is truly magical at sunrise.
+              </p>
+            </div>
+            <div class="review-card">
+              <h4>Rahul Verma</h4>
+              <p class="stars" aria-label="4 out of 5">★★★★☆</p>
+              <p>
+                Well organized trip, smooth booking experience with Kindora!
+              </p>
+            </div>
+          </div>
+
+          <div class="review-form">
+            <h3>Add Your Review</h3>
+            <form id="reviewForm">
+              <input type="text" id="name" placeholder="Your Name" required />
+
+              <div id="starRating" class="star-input" role="radiogroup" aria-label="Star rating">
+                <button type="button" data-value="1" role="radio" aria-checked="false" aria-label="1 star">★</button>
+                <button type="button" data-value="2" role="radio" aria-checked="false" aria-label="2 stars">★</button>
+                <button type="button" data-value="3" role="radio" aria-checked="false" aria-label="3 stars">★</button>
+                <button type="button" data-value="4" role="radio" aria-checked="false" aria-label="4 stars">★</button>
+                <button type="button" data-value="5" role="radio" aria-checked="false" aria-label="5 stars">★</button>
+              </div>
+
+              <textarea id="comment" rows="4" placeholder="Write your review…" required></textarea>
+
+              <button type="submit" class="primary-btn">Submit Review</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">🌍 What is Kindora?</button>
+            <div class="faq-answer" hidden>
+              <p>
+                Kindora is a non-profit tourism guide that helps you explore the world — focusing on culture, nature, food, and unique experiences.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">💰 Is Kindora free to use?</button>
+            <div class="faq-answer" hidden>
+              <p>
+                Yes! Kindora is completely free to explore. We don’t charge users or promote religious content — only authentic travel inspiration.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">✈️ Can I suggest places to add?</button>
+            <div class="faq-answer" hidden>
+              <p>
+                Absolutely! You can share your favorite destinations, and we’ll review them to be added to our guides.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">👉 What other services does Kindora provide?</button>
+            <div class="faq-answer" hidden>
+              <p>
+                Kindora doesn’t just show destinations — it inspires, guides, and educates travelers with maps, itineraries, cultural highlights, and travel tips.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <h3>Kindora</h3>
+          <p>
+            Your gateway to dream destinations around the globe.<br />
+            Explore, travel, and create unforgettable memories with us.
+          </p>
+        </div>
+
+        <div class="footer-middle">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><button class="linklike" data-toggle="#inspireScroll">Be Inspired</button></li>
+            <li><a href="explore.html">Places to Go</a></li>
+            <li><a href="things_to_do.html">Things to Do</a></li>
+            <li><a href="booking.php">Plan Your Trip</a></li>
+            <li><a href="contactus.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-right">
+          <h4>Stay Connected</h4>
+          <form class="subscribe-form" id="subscribeForm">
+            <input type="email" id="subscribeEmail" placeholder="Enter your email" required />
+            <button type="submit">Subscribe</button>
+          </form>
+          <p class="sub-note" id="subscribeNote" hidden>Thanks for subscribing!</p>
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><img src="icons/facebook.jpeg" alt="Facebook" loading="lazy" decoding="async" /></a>
+            <a href="#" aria-label="Instagram"><img src="icons/instagram.jpeg" alt="Instagram" loading="lazy" decoding="async" /></a>
+            <a href="#" aria-label="Twitter"><img src="icons/twitter.png" alt="Twitter" loading="lazy" decoding="async" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Kindora. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to top" hidden>↑</button>
+  </body>
+</html>
