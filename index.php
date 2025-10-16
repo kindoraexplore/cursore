@@ -1,3 +1,53 @@
+<?php
+require_once 'config/database.php';
+
+// Get featured destinations
+$featuredDestinations = $db->fetchAll(
+    "SELECT * FROM destinations WHERE is_featured = 1 AND is_active = 1 ORDER BY rating DESC LIMIT 10"
+);
+
+// Get featured packages
+$featuredPackages = $db->fetchAll(
+    "SELECT * FROM packages WHERE is_featured = 1 AND is_active = 1 ORDER BY created_at DESC LIMIT 3"
+);
+
+// Get deals (we'll create a deals table or use packages with discounts)
+$deals = $db->fetchAll(
+    "SELECT * FROM packages WHERE is_active = 1 ORDER BY RAND() LIMIT 6"
+);
+
+// Get wonders (7 wonders of the world)
+$wonders = $db->fetchAll(
+    "SELECT * FROM destinations WHERE category = 'culture' AND is_active = 1 ORDER BY rating DESC LIMIT 7"
+);
+
+// Get testimonials
+$testimonials = $db->fetchAll(
+    "SELECT r.*, u.first_name, u.last_name 
+     FROM reviews r 
+     JOIN users u ON r.user_id = u.id 
+     WHERE r.is_approved = 1 
+     ORDER BY r.created_at DESC LIMIT 3"
+);
+
+// Get FAQ
+$faqs = $db->fetchAll(
+    "SELECT * FROM faqs WHERE is_active = 1 ORDER BY order_index ASC"
+);
+
+// Get volunteers data (static for now)
+$volunteers = [
+    ['title' => 'First Year Volunteers', 'description' => 'Our journey begins with passionate travelers and volunteers joining hands to explore and promote sustainable tourism.'],
+    ['title' => 'Local Partners', 'description' => 'Kindora has started collaborations with local guides and cultural storytellers to bring authentic experiences.'],
+    ['title' => 'Sustainability Ambassadors', 'description' => 'Early volunteers working on eco-travel, heritage protection, and community-led projects.'],
+    ['title' => 'Launch Event', 'description' => 'Kindora officially launched in 2025 with a vision to inspire world exploration.'],
+    ['title' => 'Virtual Culture Exchange', 'description' => 'Hosted our first online cultural session connecting travelers from different continents.'],
+    ['title' => 'Eco & Community Activities', 'description' => 'Beginning small eco-drives and heritage awareness campaigns with local groups.'],
+    ['title' => 'Countries Featured', 'description' => 'Within the first year, Kindora highlights major attractions from Asia, Europe, and Africa.'],
+    ['title' => 'Community Growth', 'description' => 'Thousands of explorers inspired to travel responsibly since our launch.'],
+    ['title' => 'Future Vision', 'description' => 'Expanding our global reach by adding more destinations, volunteer programs, and cultural events in upcoming years.']
+];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +68,7 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
+            <a href="index.php" class="nav-logo">
                 <i class="fas fa-globe-americas"></i>
                 <span>Kindora</span>
             </a>
@@ -63,11 +113,11 @@
                         </div>
                     </div>
                 </div>
-                <a href="pages/explore.html" class="nav-link">
+                <a href="pages/explore.php" class="nav-link">
                     <i class="fas fa-map-marker-alt"></i>
                     Places to Go
                 </a>
-                <a href="pages/things_to_do.html" class="nav-link">
+                <a href="pages/things_to_do.php" class="nav-link">
                     <i class="fas fa-list-ul"></i>
                     Things to Do
                 </a>
@@ -157,7 +207,30 @@
                 <p class="section-subtitle">Discover the world's most breathtaking destinations</p>
             </div>
             <div class="places-grid" id="placesGrid">
-                <!-- Places will be loaded dynamically -->
+                <?php foreach ($featuredDestinations as $destination): ?>
+                    <div class="place-card" data-category="<?php echo $destination['category']; ?>" data-budget="<?php echo $destination['budget_level']; ?>">
+                        <a href="pages/destination_detail.php?id=<?php echo $destination['id']; ?>">
+                            <div class="card-image">
+                                <img src="<?php echo htmlspecialchars($destination['image_url']); ?>" alt="<?php echo htmlspecialchars($destination['name']); ?>" onerror="this.src='assets/images/placeholder.jpg'" />
+                                <div class="card-overlay">
+                                    <div class="card-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span><?php echo number_format($destination['rating'], 1); ?></span>
+                                    </div>
+                                    <div class="card-price">From $<?php echo number_format(rand(99, 999)); ?></div>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3><?php echo htmlspecialchars($destination['name']); ?></h3>
+                                <p><?php echo htmlspecialchars($destination['country']); ?></p>
+                                <div class="card-tags">
+                                    <span class="tag"><?php echo ucfirst($destination['category']); ?></span>
+                                    <span class="tag"><?php echo ucfirst($destination['budget_level']); ?> Budget</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -169,8 +242,29 @@
                 <h2 class="section-title">Our Travel Packages</h2>
                 <p class="section-subtitle">Carefully crafted experiences for every type of traveler</p>
             </div>
-            <div class="packages-grid" id="packagesGrid">
-                <!-- Packages will be loaded dynamically -->
+            <div class="packages-grid">
+                <?php foreach ($featuredPackages as $package): ?>
+                    <div class="package-card">
+                        <div class="package-image">
+                            <img src="<?php echo htmlspecialchars($package['image_url']); ?>" alt="<?php echo htmlspecialchars($package['name']); ?>" onerror="this.src='assets/images/placeholder.jpg'" />
+                            <div class="package-badge"><?php echo ucfirst($package['category']); ?></div>
+                        </div>
+                        <div class="package-content">
+                            <h3><?php echo htmlspecialchars($package['name']); ?></h3>
+                            <p><?php echo htmlspecialchars($package['short_description']); ?></p>
+                            <div class="package-features">
+                                <span><i class="fas fa-calendar"></i> <?php echo $package['duration_days']; ?> days</span>
+                                <span><i class="fas fa-users"></i> Max <?php echo $package['max_participants']; ?> people</span>
+                                <span><i class="fas fa-star"></i> <?php echo ucfirst($package['difficulty_level']); ?> level</span>
+                            </div>
+                            <div class="package-price">
+                                <span class="price">From $<?php echo number_format($package['price']); ?></span>
+                                <span class="duration"><?php echo $package['duration_days']; ?> days</span>
+                            </div>
+                            <a href="pages/package_detail.php?id=<?php echo $package['id']; ?>" class="btn btn-package">Book Now</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -182,8 +276,31 @@
                 <h2 class="section-title">Special Offers</h2>
                 <p class="section-subtitle">Limited time deals you don't want to miss</p>
             </div>
-            <div class="deals-carousel" id="dealsCarousel">
-                <!-- Deals will be loaded dynamically -->
+            <div class="deals-carousel">
+                <?php foreach (array_slice($deals, 0, 6) as $index => $deal): ?>
+                    <div class="deal-slide <?php echo $index === 0 ? 'active' : ''; ?>">
+                        <div class="deal-content">
+                            <div class="deal-image">
+                                <img src="<?php echo htmlspecialchars($deal['image_url']); ?>" alt="<?php echo htmlspecialchars($deal['name']); ?>" onerror="this.src='assets/images/placeholder.jpg'" />
+                                <div class="deal-discount"><?php echo rand(20, 40); ?>% OFF</div>
+                            </div>
+                            <div class="deal-info">
+                                <h3><?php echo htmlspecialchars($deal['name']); ?></h3>
+                                <p><?php echo htmlspecialchars($deal['short_description']); ?></p>
+                                <div class="deal-price">
+                                    <span class="original-price">$<?php echo number_format($deal['price'] * 1.3); ?></span>
+                                    <span class="sale-price">$<?php echo number_format($deal['price']); ?></span>
+                                </div>
+                                <a href="pages/package_detail.php?id=<?php echo $deal['id']; ?>" class="btn btn-deal">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="carousel-dots">
+                <?php for ($i = 0; $i < min(6, count($deals)); $i++): ?>
+                    <span class="dot <?php echo $i === 0 ? 'active' : ''; ?>" onclick="currentSlide(<?php echo $i + 1; ?>)"></span>
+                <?php endfor; ?>
             </div>
         </div>
     </section>
@@ -195,8 +312,26 @@
                 <h2 class="section-title">7 Wonders of the World</h2>
                 <p class="section-subtitle">Discover the most magnificent man-made structures on Earth</p>
             </div>
-            <div class="wonders-grid" id="wondersGrid">
-                <!-- Wonders will be loaded dynamically -->
+            <div class="wonders-grid">
+                <?php foreach (array_slice($wonders, 0, 7) as $wonder): ?>
+                    <div class="wonder-card">
+                        <a href="pages/wonder_detail.php?id=<?php echo $wonder['id']; ?>">
+                            <div class="wonder-image">
+                                <img src="<?php echo htmlspecialchars($wonder['image_url']); ?>" alt="<?php echo htmlspecialchars($wonder['name']); ?>" onerror="this.src='assets/images/placeholder.jpg'" />
+                                <div class="wonder-overlay">
+                                    <div class="wonder-info">
+                                        <h3><?php echo htmlspecialchars($wonder['name']); ?></h3>
+                                        <p><?php echo htmlspecialchars($wonder['country']); ?></p>
+                                        <div class="wonder-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span><?php echo number_format($wonder['rating'], 1); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -208,8 +343,31 @@
                 <h2 class="section-title">What Our Travelers Say</h2>
                 <p class="section-subtitle">Real experiences from real adventurers</p>
             </div>
-            <div class="testimonials-carousel" id="testimonialsCarousel">
-                <!-- Testimonials will be loaded dynamically -->
+            <div class="testimonials-carousel">
+                <?php foreach ($testimonials as $index => $testimonial): ?>
+                    <div class="testimonial-slide <?php echo $index === 0 ? 'active' : ''; ?>">
+                        <div class="testimonial-content">
+                            <div class="testimonial-image">
+                                <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($testimonial['first_name'] . ' ' . $testimonial['last_name']); ?>&background=003366&color=fff&size=120" alt="<?php echo htmlspecialchars($testimonial['first_name'] . ' ' . $testimonial['last_name']); ?>" />
+                            </div>
+                            <div class="testimonial-text">
+                                <div class="stars">
+                                    <?php for ($i = 0; $i < $testimonial['rating']; $i++): ?>
+                                        <i class="fas fa-star"></i>
+                                    <?php endfor; ?>
+                                </div>
+                                <p>"<?php echo htmlspecialchars($testimonial['comment']); ?>"</p>
+                                <h4><?php echo htmlspecialchars($testimonial['first_name'] . ' ' . $testimonial['last_name']); ?></h4>
+                                <span>Traveler</span>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="testimonial-dots">
+                <?php for ($i = 0; $i < count($testimonials); $i++): ?>
+                    <span class="dot <?php echo $i === 0 ? 'active' : ''; ?>" onclick="currentTestimonial(<?php echo $i + 1; ?>)"></span>
+                <?php endfor; ?>
             </div>
         </div>
     </section>
@@ -242,8 +400,13 @@
                 <h2 class="section-title">Kindora Volunteers & Events (2025)</h2>
                 <p class="section-subtitle">Join our community of passionate travelers and volunteers</p>
             </div>
-            <div class="volunteers-grid" id="volunteersGrid">
-                <!-- Volunteers will be loaded dynamically -->
+            <div class="volunteers-grid">
+                <?php foreach ($volunteers as $volunteer): ?>
+                    <div class="volunteer-card">
+                        <h3><?php echo htmlspecialchars($volunteer['title']); ?></h3>
+                        <p><?php echo htmlspecialchars($volunteer['description']); ?></p>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -256,7 +419,17 @@
                 <p class="section-subtitle">Real experiences from real adventurers</p>
             </div>
             <div class="reviews-grid" id="reviewsList">
-                <!-- Reviews will be loaded dynamically -->
+                <?php foreach (array_slice($testimonials, 0, 5) as $review): ?>
+                    <div class="review-card">
+                        <h4><?php echo htmlspecialchars($review['first_name'] . ' ' . $review['last_name']); ?></h4>
+                        <div class="stars">
+                            <?php for ($i = 0; $i < $review['rating']; $i++): ?>
+                                <i class="fas fa-star"></i>
+                            <?php endfor; ?>
+                        </div>
+                        <p><?php echo htmlspecialchars($review['comment']); ?></p>
+                    </div>
+                <?php endforeach; ?>
             </div>
             <div class="review-form-container">
                 <h3>Add Your Review</h3>
@@ -310,8 +483,18 @@
                 <h2 class="section-title">Frequently Asked Questions</h2>
                 <p class="section-subtitle">Everything you need to know about traveling with Kindora</p>
             </div>
-            <div class="faq-container" id="faqContainer">
-                <!-- FAQ will be loaded dynamically -->
+            <div class="faq-container">
+                <?php foreach ($faqs as $faq): ?>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span><?php echo htmlspecialchars($faq['question']); ?></span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p><?php echo htmlspecialchars($faq['answer']); ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -338,9 +521,9 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="pages/explore.html">Places to Go</a></li>
-                        <li><a href="pages/things_to_do.html">Things to Do</a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="pages/explore.php">Places to Go</a></li>
+                        <li><a href="pages/things_to_do.php">Things to Do</a></li>
                         <li><a href="pages/booking.php">Plan Your Trip</a></li>
                         <li><a href="pages/aboutus.html">About Us</a></li>
                         <li><a href="pages/contactus.html">Contact</a></li>
@@ -401,6 +584,5 @@
 
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/data.js"></script>
 </body>
 </html>
