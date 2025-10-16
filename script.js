@@ -11,6 +11,7 @@ function initializeApp() {
     setupFAQ();
     setupScrollEffects();
     setupNewsletter();
+    setupReviews();
     setupBackToTop();
     setupAnimations();
     setupPlaceFiltering();
@@ -404,6 +405,86 @@ function setupNewsletter() {
             }
         });
     }
+}
+
+// Reviews Setup
+function setupReviews() {
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewsList = document.getElementById('reviewsList');
+    const starRating = document.getElementById('starRating');
+    let selectedRating = 0;
+
+    if (starRating) {
+        const stars = starRating.querySelectorAll('span');
+        
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                selectedRating = index + 1;
+                updateStarDisplay(stars, selectedRating);
+            });
+            
+            star.addEventListener('mouseenter', () => {
+                updateStarDisplay(stars, index + 1);
+            });
+        });
+        
+        starRating.addEventListener('mouseleave', () => {
+            updateStarDisplay(stars, selectedRating);
+        });
+    }
+
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('reviewName').value;
+            const comment = document.getElementById('reviewComment').value;
+            
+            if (selectedRating === 0) {
+                showNotification('Please select a star rating!', 'error');
+                return;
+            }
+            
+            if (!name || !comment) {
+                showNotification('Please fill in all fields!', 'error');
+                return;
+            }
+            
+            // Create new review card
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            reviewCard.innerHTML = `
+                <h4>${name}</h4>
+                <div class="stars">
+                    ${'★'.repeat(selectedRating)}${'☆'.repeat(5 - selectedRating)}
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            // Add to reviews list
+            reviewsList.insertBefore(reviewCard, reviewsList.firstChild);
+            
+            // Reset form
+            this.reset();
+            selectedRating = 0;
+            if (starRating) {
+                const stars = starRating.querySelectorAll('span');
+                updateStarDisplay(stars, 0);
+            }
+            
+            showNotification('Thank you for your review!', 'success');
+        });
+    }
+}
+
+function updateStarDisplay(stars, rating) {
+    stars.forEach((star, index) => {
+        if (index < rating) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
 }
 
 // Back to Top Button
