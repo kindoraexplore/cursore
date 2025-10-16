@@ -16,6 +16,10 @@ html { scroll-behavior: smooth; }
 body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: var(--text); background: var(--bg); }
 body.no-js .hero-video { display: none; }
 
+/* Page scroll progress bar */
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 1000; background: transparent; }
+.scroll-progress .bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent), #ff8c00); box-shadow: 0 0 12px rgba(255, 204, 0, 0.6); transition: width .1s linear; }
+
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
@@ -160,6 +164,16 @@ a { color: inherit; text-decoration: none; }
 /* Effects */
 .fade-in { opacity: 0; transform: translateY(8px); transition: opacity .6s ease, transform .6s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* Themed scrollbars (WebKit) */
+/* Horizontal lists and page */
+*::-webkit-scrollbar { height: 10px; width: 10px; }
+*::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
+*::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--accent), var(--accent-600)); border-radius: 10px; border: 2px solid rgba(255,255,255,0.6); }
+*::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--accent-600), var(--accent)); }
+
+/* Firefox */
+* { scrollbar-width: thin; scrollbar-color: var(--accent) rgba(0,0,0,0.08); }
 
 /* Responsive */
 @media (max-width: 900px) {
